@@ -24,7 +24,7 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, en el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
-puntaje=0;
+puntaje=0
 
 # El usuario deberá contestar 3 preguntas
 for _ in range(3):
@@ -38,22 +38,24 @@ for _ in range(3):
 
  # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
-        try:
-            user_answer = int(input("Respuesta: ")) - 1
-            # Se verifica si la respuesta es correcta
-            if user_answer<0 or user_answer>= len(answers[question_index]): 
-            #si lo que ingresa es menor a 0 o mayor o igual a 3 da error 
+            user_imput = input("Respuesta: ")
+            contiene_numero = [caracter.isdigit()  for caracter in user_imput] #recorre cada caratcter de la cadena y me guarda en una lista el rdo de esa iteracion, false o true   
+            if not any(contiene_numero): #me devuelve true si al menos uno de los elementos de la lista es tru
                 print ('Respuesta no valida')
-                sys.exit (1) #termina el proograma
-            if user_answer ==  correct_answers_index[question_index]:
-                print("¡Correcto!")
-                puntaje +=1
-                break #es la sentencia para salir del bucle en caso de condicion correcta
+                sys.exit (1) #termina el programa
             else:
-                puntaje= puntaje - 0.5
-        except ValueError:
-            print ('Respuesta no valida')
-            sys.exit (1) #termina el proograma
+                user_answer= int(user_imput)-1
+                # Se verifica si la respuesta es correcta
+                if user_answer<0 or user_answer>= len(answers[question_index]): 
+                #si lo que ingresa es menor a 0 o mayor o igual a 3 da error 
+                    print ('Respuesta no valida')
+                    sys.exit (1) #termina el programa
+                elif user_answer ==  correct_answers_index[question_index]:
+                    print("¡Correcto!")
+                    puntaje +=1
+                    break #es la sentencia para salir del bucle en caso de condicion correcta
+                else:
+                    puntaje= puntaje - 0.5
 
 
     else:
